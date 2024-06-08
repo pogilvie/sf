@@ -1,6 +1,6 @@
 {
   "name": "sf",
-  "module": "main.ts",
+  "module": "sf.ts",
   "type": "module",
   "devDependencies": {
     "@types/bun": "^1.1.3"
