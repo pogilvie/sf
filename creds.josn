@@ -1,0 +1,16 @@
+{
+  "status": 0,
+  "result": {
+    "id": "00D61000000JfR9EAK",
+    "apiVersion": "60.0",
+    "accessToken": "00D61000000JfR9!ARUAQMtKrd2xcsi2P21OhVgwr8ylet4SaXGTmTTvp_cudpI7zSEItUmAafp75AfrJ3t44I93YjY275D8z.47MvH6lY0_Is3a",
+    "instanceUrl": "https://ogilvie-dev-ed.my.salesforce.com",
+    "username": "code@ogilvie.us.com",
+    "clientId": "PlatformCLI",
+    "connectedStatus": "Connected",
+    "alias": "dev"
+  },
+  "warnings": [
+    "This command will expose sensitive information that allows for subsequent activity using your current authenticated session.\nSharing this information is equivalent to logging someone in under the current credential, resulting in unintended access and escalation of privilege.\nFor additional information, please review the authorization section of the https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_web_flow.htm."
+  ]
+}
