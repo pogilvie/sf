@@ -14,6 +14,21 @@ export type Creds = {
         alias: string
     },
     warnings: string[]
+};
+
+
+export class SfResponse {
+    success: boolean;
+    status: number;
+    msg: string;
+    body: any;
+
+    constructor(success: boolean, status: number, msg: string, body: any)  {
+        this.success = success;
+        this.status = status;
+        this.msg = msg;
+        this.body = body;
+    }
 }
 
 export class Sf {
@@ -34,23 +49,25 @@ export class Sf {
      * @throws Error with return status and mesg when reqquest fails
      */
 
-    async query(query: string): Promise<any> {
+    async query(query: string): Promise<SfResponse> {
         const url = this.queryURL + encodeURIComponent(query);
-       
+        
         const payload = {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${this.accessToken}`,
                 'Content-Type': 'application/json'
             }
-        }
+        };
 
-        const response = await fetch(url, payload)
-        if (!response.ok) {
-            throw new Error(`status: ${response.status} msg: ${response.statusText}`);
-        }
-
-        return response.json();
+        const response = await fetch(url, payload);
+        const body = await response.json();
+        return new SfResponse(
+            response.ok,
+            response.status,
+            response.statusText,
+            body
+        );
     }
 
     /**
@@ -60,7 +77,7 @@ export class Sf {
      * @throws: Error with return status and msg when reqquest fails
      */
 
-    async insert(sobject: string, record: any): Promise<any> {
+    async insert(sobject: string, record: any): Promise<SfResponse> {
         const url = `${this.sobjectURL}/${sobject}`;
 
         const payload = {
@@ -73,11 +90,13 @@ export class Sf {
         }
 
         const response = await fetch(url, payload);
-        if (!response.ok) {
-            // throw new Error(`status: ${response.status} msg: ${response.statusText}`);
-            console.log(`status: ${response.status} msg: ${response.statusText}`);
-        }
-        return response.json();
+        const body = await response.json();
+        return new SfResponse(
+            response.ok,
+            response.status,
+            response.statusText,
+            body
+        );
     }
 
     /**
@@ -86,7 +105,7 @@ export class Sf {
      * @returns Salesforce JSON response
      * @throws Errror with call return status and message
      */
-    async update(sobject: string, id: string, record: any): Promise<any> {
+    async update(sobject: string, id: string, record: any): Promise<SfResponse> {
         const url = `${this.sobjectURL}/${sobject}/${id}`;
 
         const payload = {
@@ -99,12 +118,14 @@ export class Sf {
         };
 
         const response = await fetch(url, payload);
-        if (!response.ok) {
-            throw new Error(`status: ${response.status} msg: ${response.statusText}`);
-        }
-        return response.json();
+        const body = await response.json();
+        return new SfResponse(
+            response.ok,
+            response.status,
+            response.statusText,
+            body
+        );
     }
-
 }
 
 
