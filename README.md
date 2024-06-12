@@ -22,6 +22,8 @@ import credsData from './creds.json';
 import type { Creds } from '@pogilvie/sf';
 import { Sf } from '@pogilvie/sf';
 
+const creds: Creds = credsData;
+const sf = new Sf(creds);
 const query = "SELECT Id, Name, Owner.Name FROM Account LIMIT 10"
 
 let result = await sf.query(query);
